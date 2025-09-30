@@ -1,0 +1,86 @@
+[gd_scene load_steps=10 format=3 uid="uid://c1r6ou4fodehi"]
+
+[ext_resource type="Texture2D" uid="uid://ld60miud7uxg" path="res://assets/tierra.png" id="2_2wh52"]
+[ext_resource type="Texture2D" uid="uid://dmd0hjng5htnn" path="res://assets/Prueba Assets/SBS - Seamless Space Backgrounds - Large 1024x1024/Large 1024x1024/Blue Nebula/Blue_Nebula_04-1024x1024.png" id="3_826wr"]
+[ext_resource type="Texture2D" uid="uid://q3dbgwefyn3c" path="res://assets/Prueba Assets/Prinbles_GUI_Asset_Silent (1.0.0)/Prinbles_GUI_Asset_Silent (1.0.0)/asset/png/Buttons/Square-Medium/SoundOn/Default.png" id="3_ucygd"]
+[ext_resource type="Texture2D" uid="uid://dlc8d8nxxe1hg" path="res://assets/Prueba Assets/Prinbles_GUI_Asset_Silent (1.0.0)/Prinbles_GUI_Asset_Silent (1.0.0)/asset/png/Panel/Body/Headless.png" id="4_mipys"]
+[ext_resource type="Texture2D" uid="uid://chbgldctfqrwo" path="res://assets/Prueba Assets/Prinbles_GUI_Asset_Silent (1.0.0)/Prinbles_GUI_Asset_Silent (1.0.0)/asset/png/Buttons/Square-Medium/Levels/Default.png" id="5_8a8k8"]
+[ext_resource type="Texture2D" uid="uid://jcaqsb3ak3k8" path="res://assets/cometa.png" id="6_7la6k"]
+[ext_resource type="Texture2D" uid="uid://d14lufpra0sn1" path="res://assets/Prueba Assets/Prinbles_GUI_Asset_Silent (1.0.0)/Prinbles_GUI_Asset_Silent (1.0.0)/asset/png/Buttons/Rect-Medium/PlayText/Default.png" id="7_2nypq"]
+
+[sub_resource type="FontVariation" id="FontVariation_l72w3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_826wr"]
+font = SubResource("FontVariation_l72w3")
+font_size = 60
+outline_size = 10
+outline_color = Color(4.813075e-07, 0, 0.85207075, 1)
+shadow_size = 5
+
+[node name="MainPage" type="Node2D"]
+position = Vector2(136, 81)
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="bg" type="Sprite2D" parent="Background"]
+texture_filter = 1
+position = Vector2(438, 240)
+scale = Vector2(1.1191406, 0.6171875)
+texture = ExtResource("3_826wr")
+
+[node name="Tierra" type="Sprite2D" parent="Background"]
+texture_filter = 1
+position = Vector2(743, 289)
+texture = ExtResource("2_2wh52")
+
+[node name="Sprite2D" type="Sprite2D" parent="Background"]
+position = Vector2(120, 479)
+scale = Vector2(1.2727274, 1.2840909)
+texture = ExtResource("3_ucygd")
+
+[node name="Headless" type="Sprite2D" parent="Background"]
+position = Vector2(195, -16)
+scale = Vector2(1, 0.46634614)
+texture = ExtResource("4_mipys")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Background"]
+position = Vector2(255.99997, 479)
+scale = Vector2(1.3522722, 1.352273)
+texture = ExtResource("5_8a8k8")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Background"]
+position = Vector2(197, 139)
+scale = Vector2(0.4824281, 0.32702702)
+texture = ExtResource("6_7la6k")
+flip_h = true
+
+[node name="Sprite2D4" type="Sprite2D" parent="Background"]
+
+[node name="Default" type="Sprite2D" parent="Background"]
+position = Vector2(191, 356)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("7_2nypq")
+
+[node name="label" type="Label" parent="."]
+offset_left = -52.0
+offset_top = -66.0
+offset_right = 410.0
+offset_bottom = 17.0
+text = "Planet Impact"
+label_settings = SubResource("LabelSettings_826wr")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureButton" type="TextureButton" parent="PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+texture_normal = ExtResource("7_2nypq")
+ignore_texture_size = true
+
+[node name="Background2" type="Node2D" parent="."]
+position = Vector2(39, 272)

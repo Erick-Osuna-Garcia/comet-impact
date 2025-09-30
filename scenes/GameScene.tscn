@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxksh2pfuxdhh"]
+
+[ext_resource type="PackedScene" uid="uid://yo6lqoksa53k" path="res://scenes/planet_terrestrial.tscn" id="1_vh257"]
+
+[sub_resource type="Environment" id="Environment_xy3my"]
+
+[node name="Container" type="Node3D"]
+
+[node name="Planets" type="Node3D" parent="."]
+
+[node name="PlanetTerrestrial" parent="Planets" instance=ExtResource("1_vh257")]
+transform = Transform3D(283.71686, 0, -281.9663, 0, 400, 0, 281.9663, 0, 283.71686, -13.725143, 7.729828, -3.3273315)
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_xy3my")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8652883, -1.1098161, 1.5810289)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84105915, 12.581798, 292.15573)
+fov = 77.0

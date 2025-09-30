@@ -1,0 +1,156 @@
+[gd_scene load_steps=13 format=3 uid="uid://ds43qpj5n2jmf"]
+
+[ext_resource type="Script" uid="uid://xbw0t72tdwgi" path="res://scripts/main_scene.gd" id="1_611at"]
+[ext_resource type="Texture2D" uid="uid://cw3kr4hv0h1gg" path="res://assets/Prueba Assets/SBS - Seamless Space Backgrounds - Large 1024x1024/Large 1024x1024/Blue Nebula/Blue_Nebula_07-1024x1024.png" id="1_c6dvc"]
+[ext_resource type="Texture2D" uid="uid://ld60miud7uxg" path="res://assets/tierra.png" id="2_611at"]
+[ext_resource type="Texture2D" uid="uid://jcaqsb3ak3k8" path="res://assets/cometa.png" id="3_k24pf"]
+
+[sub_resource type="Theme" id="Theme_qg23i"]
+
+[sub_resource type="Theme" id="Theme_c6dvc"]
+
+[sub_resource type="SystemFont" id="SystemFont_611at"]
+font_italic = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k24pf"]
+bg_color = Color(0.085324325, 0.078948356, 0.30635774, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 2
+border_width_bottom = 1
+border_color = Color(0.71491927, 0.44267175, 0.903775, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ygjfp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1wiy7"]
+
+[sub_resource type="FontVariation" id="FontVariation_l72w3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_u1u68"]
+font = SubResource("FontVariation_l72w3")
+font_size = 60
+outline_size = 10
+outline_color = Color(4.813075e-07, 0, 0.85207075, 1)
+shadow_size = 5
+
+[node name="MainScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_611at")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.004157817, 0.07770898, 0.12191216, 1)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_c6dvc")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 485.0
+offset_top = -282.0
+offset_right = 1221.0
+offset_bottom = 1026.0
+texture = ExtResource("2_611at")
+
+[node name="TextureRect" type="TextureRect" parent="TextureRect2"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -4.0
+offset_top = 507.0
+offset_right = 128.0
+offset_bottom = 611.0
+texture = ExtResource("3_k24pf")
+expand_mode = 1
+flip_h = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.058000002
+anchor_top = 0.39400002
+anchor_right = 0.47100002
+anchor_bottom = 0.698
+offset_left = 0.18399811
+offset_top = 10.0
+offset_right = -97.59204
+offset_bottom = 62.695984
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_qg23i")
+
+[node name="BT_Incio" type="Button" parent="VBoxContainer"]
+texture_filter = 2
+layout_mode = 2
+size_flags_vertical = 3
+theme = SubResource("Theme_c6dvc")
+theme_override_fonts/font = SubResource("SystemFont_611at")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_k24pf")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ygjfp")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_1wiy7")
+text = "Inicio
+"
+
+[node name="BT_Opciones" type="Button" parent="VBoxContainer"]
+texture_filter = 2
+layout_mode = 2
+size_flags_vertical = 3
+theme = SubResource("Theme_c6dvc")
+theme_override_fonts/font = SubResource("SystemFont_611at")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_k24pf")
+text = "Opciones
+"
+
+[node name="BT_Salir" type="Button" parent="VBoxContainer"]
+texture_filter = 2
+layout_mode = 2
+size_flags_vertical = 3
+theme = SubResource("Theme_c6dvc")
+theme_override_fonts/font = SubResource("SystemFont_611at")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_k24pf")
+text = "Salir"
+
+[node name="label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.082465276
+anchor_top = 0.16820988
+anchor_right = 0.082465276
+anchor_bottom = 0.16820988
+offset_left = -52.0
+offset_top = -66.0
+offset_right = 410.0
+offset_bottom = 17.0
+text = "Planet Impact"
+label_settings = SubResource("LabelSettings_u1u68")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="VBoxContainer/BT_Incio" to="." method="_on_bt_incio_pressed"]
+[connection signal="pressed" from="VBoxContainer/BT_Opciones" to="." method="_on_bt_opciones_pressed"]
+[connection signal="pressed" from="VBoxContainer/BT_Salir" to="." method="_on_bt_salir_pressed"]
