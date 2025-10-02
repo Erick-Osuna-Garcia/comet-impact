@@ -156,7 +156,7 @@ cache/0/50/0/scale = 1.0
 [node name="Container" type="Node3D"]
 script = ExtResource("1_7s5hy")
 
-[node name="Planets" type="Node3D" parent="."]
+[node name="Tierra" type="Node3D" parent="." groups=["observable"]]
 
 [node name="PlanetTerrestrial" parent="Planets" instance=ExtResource("1_vh257")]
 transform = Transform3D(396.35562, 0, -53.874943, 0, 400, 0, 53.874943, 0, 396.35562, -13.7392845, 9.437153, -3.3273315)
