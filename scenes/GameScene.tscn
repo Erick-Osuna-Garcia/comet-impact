@@ -1,15 +1,29 @@
-[gd_scene load_steps=3 format=3 uid="uid://cxksh2pfuxdhh"]
+[gd_scene load_steps=7 format=3 uid="uid://cxksh2pfuxdhh"]
 
 [ext_resource type="PackedScene" uid="uid://yo6lqoksa53k" path="res://scenes/planet_terrestrial.tscn" id="1_vh257"]
+[ext_resource type="Script" uid="uid://yvmvesq2gcda" path="res://scripts/asteroide.gd" id="2_xy3my"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_vh257"]
 
 [sub_resource type="Environment" id="Environment_xy3my"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xy3my"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_xy3my"]
+radius = 40.0
+height = 40.0
 
 [node name="Container" type="Node3D"]
 
 [node name="Planets" type="Node3D" parent="."]
 
 [node name="PlanetTerrestrial" parent="Planets" instance=ExtResource("1_vh257")]
-transform = Transform3D(283.71686, 0, -281.9663, 0, 400, 0, 281.9663, 0, 283.71686, -13.725143, 7.729828, -3.3273315)
+transform = Transform3D(-334.94562, 0, 218.6588, 0, 400, 0, -218.6588, 0, -334.94562, -13.725143, 7.729828, -3.3273315)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Planets" groups=["cuerpos_gravitacionales"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Planets/StaticBody3D"]
+shape = SubResource("SphereShape3D_vh257")
 
 [node name="Environment" type="Node3D" parent="."]
 
@@ -20,5 +34,19 @@ environment = SubResource("Environment_xy3my")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8652883, -1.1098161, 1.5810289)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84105915, 12.581798, 292.15573)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84105915, 12.581798, 353.70035)
 fov = 77.0
+
+[node name="Asteroide" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -461.9413, 0, 0)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Asteroide"]
+gravity_scale = 0.0
+script = ExtResource("2_xy3my")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Asteroide/RigidBody3D"]
+shape = SubResource("SphereShape3D_xy3my")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Asteroide/RigidBody3D"]
+mesh = SubResource("SphereMesh_xy3my")
+skeleton = NodePath("../..")
