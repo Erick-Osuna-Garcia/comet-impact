@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cxksh2pfuxdhh"]
+[gd_scene load_steps=8 format=3 uid="uid://cxksh2pfuxdhh"]
 
 [ext_resource type="PackedScene" uid="uid://yo6lqoksa53k" path="res://scenes/planet_terrestrial.tscn" id="1_vh257"]
+[ext_resource type="Script" uid="uid://dm1f3g1kjcg8o" path="res://scripts/camara.gd" id="2_cxv17"]
 [ext_resource type="Script" uid="uid://yvmvesq2gcda" path="res://scripts/asteroide.gd" id="2_xy3my"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_vh257"]
@@ -15,14 +16,14 @@ height = 40.0
 
 [node name="Container" type="Node3D"]
 
-[node name="Planets" type="Node3D" parent="."]
+[node name="Tierra" type="Node3D" parent="." groups=["observable"]]
 
-[node name="PlanetTerrestrial" parent="Planets" instance=ExtResource("1_vh257")]
-transform = Transform3D(-334.94562, 0, 218.6588, 0, 400, 0, -218.6588, 0, -334.94562, -13.725143, 7.729828, -3.3273315)
+[node name="PlanetTerrestrial" parent="Tierra" instance=ExtResource("1_vh257")]
+transform = Transform3D(248.8584, 0, -313.1609, 0, 400, 0, 313.1609, 0, 248.8584, -13.725143, 7.729828, -3.3273315)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Planets" groups=["cuerpos_gravitacionales"]]
+[node name="StaticBody3D" type="StaticBody3D" parent="Tierra" groups=["cuerpos_gravitacionales"]]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Planets/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Tierra/StaticBody3D"]
 shape = SubResource("SphereShape3D_vh257")
 
 [node name="Environment" type="Node3D" parent="."]
@@ -36,17 +37,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8652883, -1.1098161, 1.581
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84105915, 12.581798, 353.70035)
 fov = 77.0
+script = ExtResource("2_cxv17")
+initial_target = NodePath("../Tierra")
 
-[node name="Asteroide" type="Node3D" parent="."]
+[node name="Asteroide - Prueba" type="Node3D" parent="." groups=["observable"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -461.9413, 0, 0)
 
-[node name="RigidBody3D" type="RigidBody3D" parent="Asteroide"]
+[node name="RigidBody3D" type="RigidBody3D" parent="Asteroide - Prueba"]
 gravity_scale = 0.0
 script = ExtResource("2_xy3my")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Asteroide/RigidBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Asteroide - Prueba/RigidBody3D"]
 shape = SubResource("SphereShape3D_xy3my")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Asteroide/RigidBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Asteroide - Prueba/RigidBody3D"]
 mesh = SubResource("SphereMesh_xy3my")
 skeleton = NodePath("../..")
