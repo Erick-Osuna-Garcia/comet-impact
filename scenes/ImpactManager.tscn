@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://jcpoypv1uiq4"]
+
+[ext_resource type="Script" uid="uid://bitka1bv572r8" path="res://scenes/impact_manager.gd" id="1_n63eg"]
+
+[node name="ImpactManager" type="Node3D"]
+script = ExtResource("1_n63eg")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]

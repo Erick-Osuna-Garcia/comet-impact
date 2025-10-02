@@ -87,12 +87,12 @@ nodes/TimeScale/position = Vector2(140, 140)
 node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
 
 [node name="PlanetTerrestrial" type="MeshInstance3D"]
-transform = Transform3D(-241.09956, 0, -319.17276, 0, 400, 0, 319.17276, 0, -241.09956, 0, 0, 0)
+transform = Transform3D(-203.45575, 0, 344.39233, 0, 400, 0, -344.39233, 0, -203.45575, -2.0653687, 0, 0)
 mesh = SubResource("SphereMesh_h4ifb")
 skeleton = NodePath(".")
 
 [node name="Atmosphere" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.02, 0, 0, 0, 1.02, 0, 0, 0, 1.02, 0, 0, 0)
+transform = Transform3D(-0.10653752, 0, -1.0144209, 0, 1.0199999, 0, 1.0144209, 0, -0.10653752, 0, 0, 0)
 sorting_offset = 5.0
 cast_shadow = 0
 mesh = SubResource("SphereMesh_lk7tp")

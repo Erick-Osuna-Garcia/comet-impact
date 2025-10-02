@@ -9,7 +9,7 @@
 [node name="Planets" type="Node3D" parent="."]
 
 [node name="PlanetTerrestrial" parent="Planets" instance=ExtResource("1_vh257")]
-transform = Transform3D(283.71686, 0, -281.9663, 0, 400, 0, 281.9663, 0, 283.71686, -13.725143, 7.729828, -3.3273315)
+transform = Transform3D(-105.13322, 0, 385.93695, 0, 400.00003, 0, -385.93695, 0, -105.13322, -13.7392845, 9.437153, -3.3273315)
 
 [node name="Environment" type="Node3D" parent="."]
 
@@ -22,3 +22,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8652883, -1.1098161, 1.581
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84105915, 12.581798, 292.15573)
 fov = 77.0
+
+[node name="ParticlesRoot" type="Node3D" parent="."]
+
+[node name="Wather" type="Node3D" parent="."]
