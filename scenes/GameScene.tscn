@@ -1,7 +1,19 @@
+<<<<<<< HEAD
+[gd_scene load_steps=6 format=3 uid="uid://cxksh2pfuxdhh"]
+=======
+[gd_scene load_steps=7 format=3 uid="uid://cxksh2pfuxdhh"]
+>>>>>>> 242b201 (Actualizacion de coasas)
 [gd_scene load_steps=27 format=3 uid="uid://cxksh2pfuxdhh"]
 
 [ext_resource type="Script" uid="uid://burhql6xgx4jg" path="res://scenes/game_scene.gd" id="1_7s5hy"]
 [ext_resource type="PackedScene" uid="uid://yo6lqoksa53k" path="res://scenes/planet_terrestrial.tscn" id="1_vh257"]
+<<<<<<< HEAD
+[ext_resource type="Script" uid="uid://dm1f3g1kjcg8o" path="res://scripts/camara.gd" id="2_cxv17"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_vh257"]
+=======
+[ext_resource type="Script" uid="uid://bnon40jqfopks" path="res://scenes/meteorito.gd" id="3_cxv17"]
+>>>>>>> 242b201 (Actualizacion de coasas)
 [ext_resource type="Script" uid="uid://chxn27c3ghsgi" path="res://scenes/camera_3d.gd" id="2_cxv17"]
 [ext_resource type="Script" uid="uid://bnon40jqfopks" path="res://scenes/meteorito.gd" id="3_cxv17"]
 [ext_resource type="Script" uid="uid://cf7u6v7o1put0" path="res://scenes/HUD.gd" id="4_18ig4"]
@@ -19,6 +31,22 @@
 [ext_resource type="Texture2D" uid="uid://sa4nu0p7qfqh" path="res://assets/FREE Icon/Icon set 1/0.5x/Asset 43@0.5x.png" id="13_kxqg4"]
 
 [sub_resource type="Environment" id="Environment_xy3my"]
+background_mode = 1
+background_energy_multiplier = 1.86
+ambient_light_source = 1
+ambient_light_color = Color(0, 0.6901961, 0, 1)
+glow_enabled = true
+glow_hdr_threshold = 4.0
+
+[sub_resource type="Environment" id="Environment_cxv17"]
+background_mode = 1
+glow_enabled = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_18ig4"]
+radius = 5.0
+height = 10.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7s5hy"]
 background_mode = 1
 background_energy_multiplier = 1.86
 ambient_light_source = 1
@@ -159,6 +187,12 @@ script = ExtResource("1_7s5hy")
 [node name="Tierra" type="Node3D" parent="." groups=["observable"]]
 
 [node name="PlanetTerrestrial" parent="Planets" instance=ExtResource("1_vh257")]
+<<<<<<< HEAD
+transform = Transform3D(-105.13322, 0, 385.93695, 0, 400.00003, 0, -385.93695, 0, -105.13322, -13.7392845, 9.437153, -3.3273315)
+>>>>>>> da83e4d (Intento de meteorito)
+=======
+transform = Transform3D(-71.6757, 0, 393.5262, 0, 400, 0, -393.5262, 0, -71.6757, -13.7392845, 9.437153, -3.3273315)
+>>>>>>> 242b201 (Actualizacion de coasas)
 transform = Transform3D(396.35562, 0, -53.874943, 0, 400, 0, 53.874943, 0, 396.35562, -13.7392845, 9.437153, -3.3273315)
 layers = 3
 
@@ -170,6 +204,14 @@ environment = SubResource("Environment_xy3my")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8652883, -1.1098161, 1.5810289)
 
+<<<<<<< HEAD
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("planet_target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84105915, 12.581798, 353.70035)
+=======
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84105915, 12.581798, 292.15573)
+environment = SubResource("Environment_cxv17")
+>>>>>>> 242b201 (Actualizacion de coasas)
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="Environment"]
 transform = Transform3D(-0.994375, 0, 0.105916925, 0, 1, 0, -0.105916925, 0, -0.994375, -1.8652883, 34.518837, -556.6011)
 
@@ -184,6 +226,21 @@ initial_target = NodePath("../Planets/PlanetTerrestrial")
 [node name="ParticlesRoot" type="Node3D" parent="."]
 
 [node name="Wather" type="Node3D" parent="."]
+<<<<<<< HEAD
+>>>>>>> da83e4d (Intento de meteorito)
+=======
+
+[node name="Meteorito" type="RigidBody3D" parent="." node_paths=PackedStringArray("planet")]
+transform = Transform3D(-0.0020571288, 0, -0.001420637, 0, 0.0025, 0, 0.001420637, 0, -0.0020571288, 0, 0, 300)
+script = ExtResource("3_cxv17")
+planet = NodePath("../Planets/PlanetTerrestrial")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Meteorito"]
+mesh = SubResource("SphereMesh_18ig4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Meteorito"]
+shape = SubResource("SphereShape3D_7s5hy")
+>>>>>>> 242b201 (Actualizacion de coasas)
 
 [node name="Meteorito" type="RigidBody3D" parent="." node_paths=PackedStringArray("planet")]
 transform = Transform3D(-0.0020571288, 0, -0.001420637, 0, 0.0025, 0, 0.001420637, 0, -0.0020571288, 0, 0, 300)
