@@ -1,5 +1,3 @@
-// Procedural Planet Shader - Tierra básica 🌍
-// Basado en: https://www.reddit.com/r/godot/comments/gqhy3g/procedural_planet_generator_based_on_planetarium/
 shader_type spatial;
 
 // --- Emisión de luz ---
@@ -29,8 +27,14 @@ uniform float noise_gaseous_speed : hint_range(0, 0.1) = 0.0025;
 uniform float noise_scale : hint_range(1, 10) = 2.0; // más detalle
 uniform sampler2D noise : hint_default_black;
 
+// Posición del impacto
+uniform vec3 impact_position = vec3(0.0, 0.0, 0.0);
+uniform float impact_radius : hint_range(0.0, 5.0) = 0.5;
+uniform float impact_strength : hint_range(0.0, 1.0) = 1.0;
+
 varying vec3 triplanar_power_normal;
 varying vec3 triplanar_pos;
+varying vec3 world_pos;
 
 const float triplanar_sharpness = 0.5;
 
@@ -56,6 +60,16 @@ void vertex() {
 	triplanar_power_normal /= dot(triplanar_power_normal, vec3(1.0));
 	triplanar_pos = VERTEX * vec3(noise_scale, noise_scale, noise_scale);
 	triplanar_pos *= vec3(1.0, -1.0, 1.0);
+
+	// Posición mundial
+	world_pos = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
+
+	// 🔥 Deformación del terreno por impacto
+	float dist = distance(world_pos, impact_position);
+	if (dist < impact_radius) {
+		float falloff = 1.0 - (dist / impact_radius);
+		VERTEX -= NORMAL * falloff * impact_strength * 0.3;
+	}
 }
 
 // --- Fragment ---
@@ -68,35 +82,38 @@ void fragment() {
 	vec4 color = triplanar_texture(noise, triplanar_power_normal, triplanar_pos_clone);
 	float roughness = 0.0;
 
-	// "Altitud" según el ruido
 	float d = max(max(color.r, color.g), color.b);
 
+	// Color quemado en el cráter
+	float dist = distance(world_pos, impact_position);
+	if (dist < impact_radius) {
+		color = mix(color, vec4(0.2, 0.2, 0.2, 1.0), impact_strength);
+	}
+
 	if (d < color_1_treshold) {
-		color = color_1; // océanos
+		color = color_1;
 		roughness = color_1_roughness;
 		if (color_1_emit) {
 			EMISSION = color_1.rgb;
 		}
 	}
 	else if (d < color_2_treshold) {
-		color = color_2; // playas
+		color = color_2;
 	}
 	else if (d < color_3_treshold) {
-		color = color_3; // bosques
+		color = color_3;
 	}
 	else if (d < color_4_treshold) {
-		color = color_4; // montañas
+		color = color_4;
 	}
 	else if (d < color_5_treshold) {
-		color = color_5; // nieve
+		color = color_5;
 	}
 
-	// Emisión opcional global
 	if (bool(emit)) {
 		EMISSION = color.rgb * emit;
 	}
 
-	// Resultado final
 	ALBEDO = color.rgb;
 	ROUGHNESS = roughness;
 }
