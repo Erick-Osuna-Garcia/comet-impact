@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://cxksh2pfuxdhh"]
+[gd_scene load_steps=12 format=3 uid="uid://cxksh2pfuxdhh"]
 
 [ext_resource type="PackedScene" uid="uid://yo6lqoksa53k" path="res://scenes/planet_terrestrial.tscn" id="1_vh257"]
 [ext_resource type="Script" uid="uid://chxn27c3ghsgi" path="res://scenes/camera_3d.gd" id="2_cxv17"]
 [ext_resource type="Script" uid="uid://bnon40jqfopks" path="res://scenes/meteorito.gd" id="3_cxv17"]
+[ext_resource type="Script" uid="uid://b0hjt5ud3em81" path="res://scenes/camera_ui_controller.gd" id="4_ui_controller"]
 
 [sub_resource type="Environment" id="Environment_xy3my"]
 background_mode = 1
@@ -26,12 +27,48 @@ height = 10.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7s5hy"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button"]
+bg_color = Color(0.2, 0.2, 0.2, 0.8)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.5, 0.5, 0.5, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_hover"]
+bg_color = Color(0.3, 0.3, 0.3, 0.9)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.7, 0.7, 0.7, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
 [node name="Container" type="Node3D"]
+
+[node name="Camera3D2" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.9747612, 0.22325012, 0, -0.22325012, 0.9747612, -18.876831, 65.55584, 233.36285)
+fov = 88.9
+near = 0.029
+far = 539.31
+
+[node name="Tierra2DView" type="Node3D" parent="."]
+
+[node name="PlanetTerrestrial" parent="Tierra2DView" instance=ExtResource("1_vh257")]
+transform = Transform3D(-302.59464, 0, 261.6037, 0, 10, 0, -261.6037, 0, -302.59464, -13.7392845, 9.437153, -3.3273315)
+gi_lightmap_texel_scale = 1.6179
 
 [node name="Planets" type="Node3D" parent="."]
 
 [node name="PlanetTerrestrial" parent="Planets" instance=ExtResource("1_vh257")]
-transform = Transform3D(398.36813, 0, 36.0988, 0, 400, 0, -36.0988, 0, 398.36813, -13.7392845, 9.437153, -3.3273315)
+transform = Transform3D(-365.97818, 0, -161.4319, 0, 400, 0, 161.4319, 0, -365.97818, -13.7392845, 9.437153, -3.3273315)
 
 [node name="Environment" type="Node3D" parent="."]
 
@@ -66,3 +103,31 @@ mesh = SubResource("SphereMesh_18ig4")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Meteorito"]
 shape = SubResource("SphereShape3D_7s5hy")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_ui_controller")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -80.0
+offset_right = 200.0
+offset_bottom = -20.0
+grow_vertical = 0
+
+[node name="FlatViewButton" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+text = "Vista Plana"
