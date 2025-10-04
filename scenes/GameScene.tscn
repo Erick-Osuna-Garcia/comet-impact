@@ -1,9 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://cxksh2pfuxdhh"]
+[gd_scene load_steps=13 format=3 uid="uid://cxksh2pfuxdhh"]
 
+[ext_resource type="Script" uid="uid://cxspvticsb2c1" path="res://scenes/event_logs.gd" id="1_7s5hy"]
 [ext_resource type="PackedScene" uid="uid://yo6lqoksa53k" path="res://scenes/planet_terrestrial.tscn" id="1_vh257"]
 [ext_resource type="Script" uid="uid://chxn27c3ghsgi" path="res://scenes/camera_3d.gd" id="2_cxv17"]
 [ext_resource type="Script" uid="uid://bnon40jqfopks" path="res://scenes/meteorito.gd" id="3_cxv17"]
 [ext_resource type="Script" uid="uid://b0hjt5ud3em81" path="res://scenes/camera_ui_controller.gd" id="4_ui_controller"]
+
+[sub_resource type="Environment" id="Environment_cxv17"]
+background_mode = 1
+glow_enabled = true
 
 [sub_resource type="Environment" id="Environment_xy3my"]
 background_mode = 1
@@ -12,10 +17,6 @@ ambient_light_source = 1
 ambient_light_color = Color(0, 0.6901961, 0, 1)
 glow_enabled = true
 glow_hdr_threshold = 4.0
-
-[sub_resource type="Environment" id="Environment_cxv17"]
-background_mode = 1
-glow_enabled = true
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xy3my"]
 bounce = 0.76
@@ -52,6 +53,7 @@ corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
 [node name="Container" type="Node3D"]
+script = ExtResource("1_7s5hy")
 
 [node name="Camera3D2" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.9747612, 0.22325012, 0, -0.22325012, 0.9747612, -18.876831, 65.55584, 233.36285)
@@ -59,16 +61,22 @@ fov = 88.9
 near = 0.029
 far = 539.31
 
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84105915, 12.581798, 292.15573)
+environment = SubResource("Environment_cxv17")
+fov = 97.7
+script = ExtResource("2_cxv17")
+
 [node name="Tierra2DView" type="Node3D" parent="."]
 
 [node name="PlanetTerrestrial" parent="Tierra2DView" instance=ExtResource("1_vh257")]
-transform = Transform3D(-302.59464, 0, 261.6037, 0, 10, 0, -261.6037, 0, -302.59464, -13.7392845, 9.437153, -3.3273315)
+transform = Transform3D(-389.43045, 0, -91.34499, 0, 10, 0, 91.34499, 0, -389.43045, -13.7392845, 9.437153, -3.3273315)
 gi_lightmap_texel_scale = 1.6179
 
 [node name="Planets" type="Node3D" parent="."]
 
 [node name="PlanetTerrestrial" parent="Planets" instance=ExtResource("1_vh257")]
-transform = Transform3D(-365.97818, 0, -161.4319, 0, 400, 0, 161.4319, 0, -365.97818, -13.7392845, 9.437153, -3.3273315)
+transform = Transform3D(-389.43082, 0, -91.345085, 0, 400, 0, 91.345085, 0, -389.43082, -13.7392845, 9.437153, -3.3273315)
 
 [node name="Environment" type="Node3D" parent="."]
 
@@ -80,13 +88,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8652883, -1.1098161, 1.581
 
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="Environment"]
 transform = Transform3D(-0.994375, 0, 0.105916925, 0, 1, 0, -0.105916925, 0, -0.994375, -1.8652883, 34.518837, -556.6011)
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84105915, 12.581798, 292.15573)
-environment = SubResource("Environment_cxv17")
-fov = 77.0
-script = ExtResource("2_cxv17")
-initial_target = NodePath("../Planets/PlanetTerrestrial")
 
 [node name="ParticlesRoot" type="Node3D" parent="."]
 
