@@ -10,7 +10,7 @@ extends Camera3D
 
 # --- Variables internas de la cámara ---
 var target: Node3D = null
-var distance = 300.0
+var distance = 500.0
 var yaw = 0.0
 var pitch = deg_to_rad(-30)
 

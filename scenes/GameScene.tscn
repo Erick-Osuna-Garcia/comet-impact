@@ -1,17 +1,25 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 [gd_scene load_steps=6 format=3 uid="uid://cxksh2pfuxdhh"]
 =======
 [gd_scene load_steps=7 format=3 uid="uid://cxksh2pfuxdhh"]
 >>>>>>> 242b201 (Actualizacion de coasas)
+=======
+[gd_scene load_steps=9 format=3 uid="uid://cxksh2pfuxdhh"]
+>>>>>>> 6383ee3 (mira alexander)
 [gd_scene load_steps=27 format=3 uid="uid://cxksh2pfuxdhh"]
 
 [ext_resource type="Script" uid="uid://burhql6xgx4jg" path="res://scenes/game_scene.gd" id="1_7s5hy"]
 [ext_resource type="PackedScene" uid="uid://yo6lqoksa53k" path="res://scenes/planet_terrestrial.tscn" id="1_vh257"]
 <<<<<<< HEAD
+<<<<<<< HEAD
 [ext_resource type="Script" uid="uid://dm1f3g1kjcg8o" path="res://scripts/camara.gd" id="2_cxv17"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_vh257"]
 =======
+=======
+[ext_resource type="Script" uid="uid://chxn27c3ghsgi" path="res://scenes/camera_3d.gd" id="2_cxv17"]
+>>>>>>> 6383ee3 (mira alexander)
 [ext_resource type="Script" uid="uid://bnon40jqfopks" path="res://scenes/meteorito.gd" id="3_cxv17"]
 >>>>>>> 242b201 (Actualizacion de coasas)
 [ext_resource type="Script" uid="uid://chxn27c3ghsgi" path="res://scenes/camera_3d.gd" id="2_cxv17"]
@@ -41,6 +49,10 @@ glow_hdr_threshold = 4.0
 [sub_resource type="Environment" id="Environment_cxv17"]
 background_mode = 1
 glow_enabled = true
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xy3my"]
+bounce = 0.76
+absorbent = true
 
 [sub_resource type="SphereMesh" id="SphereMesh_18ig4"]
 radius = 5.0
@@ -188,11 +200,15 @@ script = ExtResource("1_7s5hy")
 
 [node name="PlanetTerrestrial" parent="Planets" instance=ExtResource("1_vh257")]
 <<<<<<< HEAD
+<<<<<<< HEAD
 transform = Transform3D(-105.13322, 0, 385.93695, 0, 400.00003, 0, -385.93695, 0, -105.13322, -13.7392845, 9.437153, -3.3273315)
 >>>>>>> da83e4d (Intento de meteorito)
 =======
 transform = Transform3D(-71.6757, 0, 393.5262, 0, 400, 0, -393.5262, 0, -71.6757, -13.7392845, 9.437153, -3.3273315)
 >>>>>>> 242b201 (Actualizacion de coasas)
+=======
+transform = Transform3D(398.36813, 0, 36.0988, 0, 400, 0, -36.0988, 0, 398.36813, -13.7392845, 9.437153, -3.3273315)
+>>>>>>> 6383ee3 (mira alexander)
 transform = Transform3D(396.35562, 0, -53.874943, 0, 400, 0, 53.874943, 0, 396.35562, -13.7392845, 9.437153, -3.3273315)
 layers = 3
 
@@ -205,9 +221,15 @@ environment = SubResource("Environment_xy3my")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8652883, -1.1098161, 1.5810289)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 [node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("planet_target")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84105915, 12.581798, 353.70035)
 =======
+=======
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(-0.994375, 0, 0.105916925, 0, 1, 0, -0.105916925, 0, -0.994375, -1.8652883, 34.518837, -556.6011)
+
+>>>>>>> 6383ee3 (mira alexander)
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84105915, 12.581798, 292.15573)
 environment = SubResource("Environment_cxv17")
@@ -220,7 +242,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.566843, 12.581798, 238.00
 environment = SubResource("Environment_cxv17")
 fov = 77.0
 <<<<<<< HEAD
+<<<<<<< HEAD
 script = ExtResource("2_cxv17")
+initial_target = NodePath("../Tierra")
+planet_target = NodePath("../Tierra")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera3D"]
+
+[node name="Titulo" type="Label" parent="Camera3D/CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Menu" type="Node3D" parent="."]
+transform = Transform3D(21.980135, 0, 0, 0, 9.979077, 0, 0, 0, 1.0000006, 0, 0, 0)
+=======
+=======
+script = ExtResource("2_cxv17")
+initial_target = NodePath("../Planets/PlanetTerrestrial")
+>>>>>>> 6383ee3 (mira alexander)
 initial_target = NodePath("../Planets/PlanetTerrestrial")
 
 [node name="ParticlesRoot" type="Node3D" parent="."]
@@ -232,6 +271,7 @@ initial_target = NodePath("../Planets/PlanetTerrestrial")
 
 [node name="Meteorito" type="RigidBody3D" parent="." node_paths=PackedStringArray("planet")]
 transform = Transform3D(-0.0020571288, 0, -0.001420637, 0, 0.0025, 0, 0.001420637, 0, -0.0020571288, 0, 0, 300)
+physics_material_override = SubResource("PhysicsMaterial_xy3my")
 script = ExtResource("3_cxv17")
 planet = NodePath("../Planets/PlanetTerrestrial")
 
