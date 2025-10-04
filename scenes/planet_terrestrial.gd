@@ -12,7 +12,7 @@ func _ready():
 
 # Función cuando un cuerpo entra en el área
 func _on_body_entered(body: Node):
-	if body is RigidBody3D and body.name == "Meteorite":
+	if body is RigidBody3D and body.name == "Meteorito":
 		print("¡Impacto detectado en el planeta!")
 		_simulate_impact(body.global_position)
 		animate_crater()

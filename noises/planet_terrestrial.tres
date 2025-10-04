@@ -2,8 +2,8 @@
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_a3mkp"]
 noise_type = 2
-seed = 19
-frequency = 0.0055
+seed = 22
+frequency = 0.0012
 offset = Vector3(0.59, -0.16, 0.07)
 fractal_octaves = 6
 metadata/_preview_in_3d_space_ = true

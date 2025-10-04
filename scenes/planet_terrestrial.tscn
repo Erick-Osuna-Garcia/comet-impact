@@ -95,7 +95,7 @@ node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
 margin = 0.05
 
 [node name="PlanetTerrestrial" type="MeshInstance3D"]
-transform = Transform3D(268.9071, 0, 296.12372, 0, 399.99994, 0, -296.12372, 0, 268.9071, -2.0653687, 326.36914, -15.56311)
+transform = Transform3D(378.9156, 0, 128.15335, 0, 399.99994, 0, -128.15335, 0, 378.9156, -2.0653687, 326.36914, -15.56311)
 mesh = SubResource("SphereMesh_h4ifb")
 skeleton = NodePath(".")
 script = ExtResource("4_o50su")
@@ -120,4 +120,4 @@ parameters/TimeScale/scale = 0.08
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("SphereShape3D_hft54")
-debug_color = Color(0.91596025, 0.14962396, 0.6124887, 0.41960785)
+debug_color = Color(0.91764706, 0.14901961, 0.6117647, 0.6862745)
