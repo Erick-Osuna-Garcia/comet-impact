@@ -70,13 +70,13 @@ script = ExtResource("2_cxv17")
 [node name="Tierra2DView" type="Node3D" parent="."]
 
 [node name="PlanetTerrestrial" parent="Tierra2DView" instance=ExtResource("1_vh257")]
-transform = Transform3D(-389.43045, 0, -91.34499, 0, 10, 0, 91.34499, 0, -389.43045, -13.7392845, 9.437153, -3.3273315)
+transform = Transform3D(278.22653, 0, 287.38474, 0, 10, 0, -287.38474, 0, 278.22653, -13.7392845, 9.437153, -3.3273315)
 gi_lightmap_texel_scale = 1.6179
 
 [node name="Planets" type="Node3D" parent="."]
 
 [node name="PlanetTerrestrial" parent="Planets" instance=ExtResource("1_vh257")]
-transform = Transform3D(-389.43082, 0, -91.345085, 0, 400, 0, 91.345085, 0, -389.43082, -13.7392845, 9.437153, -3.3273315)
+transform = Transform3D(278.2268, 0, 287.385, 0, 400, 0, -287.385, 0, 278.2268, -13.7392845, 9.437153, -3.3273315)
 
 [node name="Environment" type="Node3D" parent="."]
 

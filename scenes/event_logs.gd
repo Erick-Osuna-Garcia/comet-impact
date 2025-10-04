@@ -107,7 +107,7 @@ func _check_camera_changes():
 		}
 		
 		# Verificar si la cámara tiene un target (para cámaras orbitales)
-		if camera.has_method("get") and camera.get("target"):
+		if camera.has_method("get") and camera.get("target") != null:
 			current_state.target = camera.target.name if camera.target else null
 		
 		var previous_state = previous_camera_states.get(camera, {})
@@ -123,8 +123,13 @@ func _check_camera_changes():
 		# if previous_state.get("rotation") != current_state.rotation:
 		# 	_log_camera_rotation_change(camera, previous_state.get("rotation"), current_state.rotation)
 		
-		if previous_state.get("target") != current_state.target:
-			_log_camera_target_change(camera, previous_state.get("target"), current_state.target)
+		# Solo reportar cambios de objetivo si ambos valores no son null
+		# Esto evita reportar la inicialización (null -> target)
+		var old_target = previous_state.get("target")
+		var new_target = current_state.target
+		
+		if old_target != new_target and old_target != null and new_target != null:
+			_log_camera_target_change(camera, old_target, new_target)
 		
 		previous_camera_states[camera] = current_state
 
@@ -176,9 +181,9 @@ func _log_camera_position_change(camera: Camera3D, old_pos: Vector3, new_pos: Ve
 
 func _log_camera_target_change(camera: Camera3D, old_target, new_target):
 	var timestamp = Time.get_datetime_string_from_system()
-	var old_str = old_target if old_target != null else "null"
-	var new_str = new_target if new_target != null else "null"
-	print("[", timestamp, "] CAMERA: ", camera.name, " objetivo: ", old_str, " -> ", new_str)
+	var old_str = old_target if old_target != null else "sin objetivo"
+	var new_str = new_target if new_target != null else "sin objetivo"
+	print("[", timestamp, "] CAMERA: ", camera.name, " cambió de objetivo: ", old_str, " -> ", new_str)
 
 # Funciones de logging para planetas
 func _log_planet_visibility_change(planet: MeshInstance3D, visibility_state: bool):

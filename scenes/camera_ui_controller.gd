@@ -69,10 +69,10 @@ func toggle_flat_view():
 		camera.current = true
 		
 		# Restaurar el estado inicial de la cámara orbital
-		restore_initial_camera_state()
+		# restore_initial_camera_state()
 		
 		if button:
-			button.text = "Vista Plana"
+			button.text = "Vista Satelital"
 		
 		# Reanudar el control orbital
 		if camera.has_method("set_target"):
