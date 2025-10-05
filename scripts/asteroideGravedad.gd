@@ -3,22 +3,21 @@ extends Camera3D
 
 # --- Variables para controlar la cámara desde el Inspector ---
 @export var initial_target: NodePath
-@export var planet_target: Node3D # Arrastra tu nodo del planeta aquí
 @export var rotation_speed = 1.0
 @export var zoom_speed = 10
-@export var min_zoom = 450 # Límite mínimo de zoom para el planeta
-@export var max_zoom = 10000 # Límite máximo de zoom para el planeta
+@export var min_zoom = 450
+@export var max_zoom = 10000
 
 # --- Referencia a la etiqueta de texto ---
-@onready var target_label = $CanvasLayer/Titulo
+@onready var target_label = $CanvasLayer/TargetNameLabel
 
 # --- Variables internas de la cámara ---
 var target: Node3D = null
-var distance = 500.0 # Distancia por defecto
+var distance = 500.0
 var yaw = 0.0
 var pitch = deg_to_rad(-30)
 
-# --- Variables para ciclar objetivos ---
+# --- NUEVAS VARIABLES PARA CICLAR OBJETIVOS ---
 var all_targets = []
 var current_target_index = 0
 
@@ -34,35 +33,28 @@ func _ready():
 		else:
 			print("ADVERTENCIA: No se pudo encontrar el objetivo inicial asignado.")
 	
-	# Espera un momento y luego busca todos los objetivos.
+	# NUEVO: Espera un momento y luego busca todos los asteroides.
 	await get_tree().create_timer(0.1).timeout
 	find_all_targets()
 
 func _unhandled_input(event):
-	# Lógica para cambiar de objetivo con la acción "Cambiar Astro".
+	# --- NUEVO: Lógica para cambiar de objetivo con 'Tab' ---
+	# (Asegúrate de tener una acción "cycle_target" asignada a la tecla Tab)
 	if Input.is_action_just_pressed("Cambiar Astro") and not all_targets.is_empty():
 		current_target_index += 1
 		if current_target_index >= all_targets.size():
 			current_target_index = 0
 		set_target(all_targets[current_target_index])
 
+	# (Tu código para el zoom se queda igual)
 	if target == null:
 		return
 		
 	if event is InputEventMouseButton:
-		var new_distance = distance
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP and event.is_pressed():
-			new_distance -= zoom_speed
+			distance = clamp(distance - zoom_speed, min_zoom, max_zoom)
 		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.is_pressed():
-			new_distance += zoom_speed
-		
-		# --- LÓGICA DE LÍMITES DE ZOOM DINÁMICOS ---
-		# Si el objetivo es el planeta, usa los límites originales.
-		if target == planet_target:
-			distance = clamp(new_distance, min_zoom, max_zoom)
-		# Si es un asteroide, usa los nuevos límites de 10 a 20.
-		else:
-			distance = clamp(new_distance, 10, 20)
+			distance = clamp(distance + zoom_speed, min_zoom, max_zoom)
 
 func _physics_process(delta):
 	if target == null:
@@ -81,41 +73,21 @@ func _physics_process(delta):
 	global_position = target.global_position + offset
 	look_at(target.global_position)
 
-# Esta función establece el objetivo, ajusta el zoom inicial y actualiza la UI.
 func set_target(new_target: Node3D):
 	target = new_target
 	if target:
 		print("Cámara ahora enfocando a: ", target.name)
-		
-		# --- LÓGICA DE ZOOM INICIAL CORREGIDA ---
-		if target == planet_target:
-			distance = 500.0 # Zoom inicial para el planeta.
-		else:
-			distance = 20.0 # Zoom inicial para un asteroide (el máximo de su nuevo rango).
-		
-		var display_text = target.name
-		if planet_target:
-			var distancia_en_juego = planet_target.global_position.distance_to(target.global_position)
-			display_text += "\nDistancia: %s unidades" % int(distancia_en_juego)
-		
-		target_label.text = display_text
-		
-		_physics_process(0) # Forzamos la actualización de la cámara.
+		target_label.text = target.name
+		_physics_process(0)
 	else:
-		target_label.text = "" # Limpia el texto si no hay objetivo.
+		target_label.text = ""
 
-# Esta función busca todos los asteroides y añade el planeta a la lista.
+# --- NUEVA FUNCIÓN: Busca todos los asteroides ---
 func find_all_targets():
 	# Busca todos los nodos que estén en el grupo "asteroides".
 	all_targets = get_tree().get_nodes_in_group("asteroides")
+	print("Cámara encontró ", all_targets.size(), " asteroides para enfocar.")
 	
-	# Revisa si asignaste el planeta en el Inspector.
-	if planet_target:
-		# Añade el planeta al PRINCIPIO de la lista de objetivos.
-		all_targets.push_front(planet_target)
-	
-	print("Cámara encontró ", all_targets.size(), " objetivos para enfocar (incluyendo el planeta).")
-	
-	# Si no hay un objetivo inicial, enfoca el primer objeto de la lista.
+	# Si no hay un objetivo inicial, enfoca el primer asteroide de la lista.
 	if target == null and not all_targets.is_empty():
 		set_target(all_targets[0])
