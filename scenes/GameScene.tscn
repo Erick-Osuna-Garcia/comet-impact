@@ -1,15 +1,82 @@
-[gd_scene load_steps=3 format=3 uid="uid://cxksh2pfuxdhh"]
+[gd_scene load_steps=13 format=3 uid="uid://cxksh2pfuxdhh"]
 
+[ext_resource type="Script" uid="uid://cxspvticsb2c1" path="res://scenes/event_logs.gd" id="1_7s5hy"]
 [ext_resource type="PackedScene" uid="uid://yo6lqoksa53k" path="res://scenes/planet_terrestrial.tscn" id="1_vh257"]
+[ext_resource type="Script" uid="uid://chxn27c3ghsgi" path="res://scenes/camera_3d.gd" id="2_cxv17"]
+[ext_resource type="Script" uid="uid://bnon40jqfopks" path="res://scenes/meteorito.gd" id="3_cxv17"]
+[ext_resource type="Script" uid="uid://b0hjt5ud3em81" path="res://scenes/camera_ui_controller.gd" id="4_ui_controller"]
+
+[sub_resource type="Environment" id="Environment_cxv17"]
+background_mode = 1
+glow_enabled = true
 
 [sub_resource type="Environment" id="Environment_xy3my"]
+background_mode = 1
+background_energy_multiplier = 1.86
+ambient_light_source = 1
+ambient_light_color = Color(0, 0.6901961, 0, 1)
+glow_enabled = true
+glow_hdr_threshold = 4.0
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xy3my"]
+bounce = 0.76
+absorbent = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_18ig4"]
+radius = 5.0
+height = 10.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7s5hy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button"]
+bg_color = Color(0.2, 0.2, 0.2, 0.8)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.5, 0.5, 0.5, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_hover"]
+bg_color = Color(0.3, 0.3, 0.3, 0.9)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.7, 0.7, 0.7, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [node name="Container" type="Node3D"]
+script = ExtResource("1_7s5hy")
+
+[node name="Camera3D2" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.9747612, 0.22325012, 0, -0.22325012, 0.9747612, -18.876831, 65.55584, 233.36285)
+fov = 88.9
+near = 0.029
+far = 539.31
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84105915, 12.581798, 292.15573)
+environment = SubResource("Environment_cxv17")
+fov = 97.7
+script = ExtResource("2_cxv17")
+
+[node name="Tierra2DView" type="Node3D" parent="."]
+
+[node name="PlanetTerrestrial" parent="Tierra2DView" instance=ExtResource("1_vh257")]
+transform = Transform3D(278.22653, 0, 287.38474, 0, 10, 0, -287.38474, 0, 278.22653, -13.7392845, 9.437153, -3.3273315)
+gi_lightmap_texel_scale = 1.6179
 
 [node name="Planets" type="Node3D" parent="."]
 
 [node name="PlanetTerrestrial" parent="Planets" instance=ExtResource("1_vh257")]
-transform = Transform3D(283.71686, 0, -281.9663, 0, 400, 0, 281.9663, 0, 283.71686, -13.725143, 7.729828, -3.3273315)
+transform = Transform3D(278.2268, 0, 287.385, 0, 400, 0, -287.385, 0, 278.2268, -13.7392845, 9.437153, -3.3273315)
 
 [node name="Environment" type="Node3D" parent="."]
 
@@ -19,6 +86,49 @@ environment = SubResource("Environment_xy3my")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8652883, -1.1098161, 1.5810289)
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84105915, 12.581798, 292.15573)
-fov = 77.0
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(-0.994375, 0, 0.105916925, 0, 1, 0, -0.105916925, 0, -0.994375, -1.8652883, 34.518837, -556.6011)
+
+[node name="ParticlesRoot" type="Node3D" parent="."]
+
+[node name="Wather" type="Node3D" parent="."]
+
+[node name="Meteorito" type="RigidBody3D" parent="." node_paths=PackedStringArray("planet")]
+transform = Transform3D(-0.0020571288, 0, -0.001420637, 0, 0.0025, 0, 0.001420637, 0, -0.0020571288, 0, 0, 300)
+physics_material_override = SubResource("PhysicsMaterial_xy3my")
+script = ExtResource("3_cxv17")
+planet = NodePath("../Planets/PlanetTerrestrial")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Meteorito"]
+mesh = SubResource("SphereMesh_18ig4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Meteorito"]
+shape = SubResource("SphereShape3D_7s5hy")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_ui_controller")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -80.0
+offset_right = 200.0
+offset_bottom = -20.0
+grow_vertical = 0
+
+[node name="FlatViewButton" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+text = "Vista Plana"

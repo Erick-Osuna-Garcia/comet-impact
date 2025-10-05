@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://cxksh2pfuxdhh"]
+
+[ext_resource type="PackedScene" uid="uid://yo6lqoksa53k" path="res://scenes/planet_terrestrial.tscn" id="1_vh257"]
+[ext_resource type="Script" uid="uid://bnon40jqfopks" path="res://scenes/meteorito.gd" id="3_cxv17"]
+
+[sub_resource type="Environment" id="Environment_xy3my"]
+background_mode = 1
+background_energy_multiplier = 1.86
+ambient_light_source = 1
+ambient_light_color = Color(0, 0.6901961, 0, 1)
+glow_enabled = true
+glow_hdr_threshold = 4.0
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xy3my"]
+rough = true
+absorbent = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_18ig4"]
+radius = 5.0
+height = 10.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7s5hy"]
+radius = 5.0
+
+[node name="Container" type="Node3D"]
+
+[node name="Planets" type="Node3D" parent="."]
+
+[node name="PlanetTerrestrial" parent="Planets" instance=ExtResource("1_vh257")]
+transform = Transform3D(-234.48383, 0, 324.06427, 0, 400, 0, -324.06427, 0, -234.48383, -13.7392845, 9.437153, -3.3273315)
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_xy3my")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8652883, -1.1098161, 1.5810289)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84105915, 12.581798, 292.15573)
+fov = 77.0
+
+[node name="ParticlesRoot" type="Node3D" parent="."]
+
+[node name="Wather" type="Node3D" parent="."]
+
+[node name="Meteorito" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 200)
+physics_material_override = SubResource("PhysicsMaterial_xy3my")
+script = ExtResource("3_cxv17")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Meteorito"]
+mesh = SubResource("SphereMesh_18ig4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Meteorito"]
+shape = SubResource("SphereShape3D_7s5hy")
