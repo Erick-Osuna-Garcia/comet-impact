@@ -1,17 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://jjonp781y0g4"]
+[gd_scene load_steps=4 format=3 uid="uid://jjonp781y0g4"]
+
+[ext_resource type="Script" uid="uid://yvmvesq2gcda" path="res://scripts/asteroideGravedad.gd" id="1_bvxmc"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_xy3my"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_bvxmc"]
 
-[node name="Asteroide - Prueba" type="Node3D" groups=["asteroides", "observable"]]
-
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
+[node name="Asteroide" type="RigidBody3D" groups=["asteroides", "observable"]]
 gravity_scale = 0.0
+script = ExtResource("1_bvxmc")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_xy3my")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_bvxmc")
 skeleton = NodePath("../..")

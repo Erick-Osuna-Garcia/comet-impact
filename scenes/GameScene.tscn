@@ -14,7 +14,7 @@ script = ExtResource("1_18ig4")
 [node name="Tierra" type="Node3D" parent="." groups=["observable"]]
 
 [node name="PlanetTerrestrial" parent="Tierra" instance=ExtResource("1_vh257")]
-transform = Transform3D(263.27264, 0, 301.14413, 0, 400, 0, -301.14413, 0, 263.27264, -13.725143, 7.729828, -3.3273315)
+transform = Transform3D(-349.83258, 0, 193.95218, 0, 400, 0, -193.95218, 0, -349.83258, -13.725143, 7.729828, -3.3273315)
 
 [node name="Tierra" type="StaticBody3D" parent="Tierra" groups=["cuerpos_gravitacionales"]]
 
