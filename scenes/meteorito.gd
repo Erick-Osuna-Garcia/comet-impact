@@ -60,3 +60,25 @@ func activar_gravedad():
 	encontrar_planeta_cercano()
 	# Activa la ejecución de _physics_process().
 	set_physics_process(true)
+
+func _integrate_forces(state):
+	# Revisa si hay algún contacto en este fotograma.
+	if state.get_contact_count() > 0:
+		print("--- Depuración de Colisión ---")
+		print("1. ¡Colisión detectada!")
+
+		var collider = state.get_contact_collider_object(0)
+		print("2. Chocó con: ", collider.name if collider else "null")
+
+		if collider:
+			print("3. ¿El objeto es un cuerpo gravitacional?: ", collider.is_in_group("cuerpos_gravitacionales"))
+			print("4. ¿El objeto tiene el script de planeta?: ", collider.has_method("recibir_impacto"))
+
+			if collider.is_in_group("cuerpos_gravitacionales") and collider.has_method("recibir_impacto"):
+				print("5. ¡Éxito! Enviando orden de impacto al planeta...")
+				var impact_position = state.get_contact_local_position(0)
+				var impact_normal = state.get_contact_local_normal(0)
+				collider.recibir_impacto(impact_position, impact_normal)
+			else:
+				print("--- Fallo: El objeto no es el planeta o no tiene el script correcto. ---")
+		queue_free()

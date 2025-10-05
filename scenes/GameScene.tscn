@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cxksh2pfuxdhh"]
+[gd_scene load_steps=7 format=3 uid="uid://cxksh2pfuxdhh"]
 
 [ext_resource type="Script" uid="uid://du3ulwtifuvpx" path="res://scenes/generadorAsteroides.gd" id="1_cxv17"]
+[ext_resource type="Script" uid="uid://b7dqt1gud55pr" path="res://scenes/planeta.gd" id="2_7s5hy"]
 [ext_resource type="PackedScene" uid="uid://bky8taexsk083" path="res://scenes/PruebaMalla.tscn" id="2_18ig4"]
 [ext_resource type="Script" uid="uid://chxn27c3ghsgi" path="res://scenes/camera_3d.gd" id="2_cxv17"]
 
@@ -20,10 +21,9 @@ glow_enabled = true
 script = ExtResource("1_cxv17")
 
 [node name="Planets" type="Node3D" parent="."]
+script = ExtResource("2_7s5hy")
 
 [node name="PruebaMalla" parent="Planets" instance=ExtResource("2_18ig4")]
-mass = 0.001
-gravity_scale = 0.0
 
 [node name="Environment" type="Node3D" parent="."]
 

@@ -16,8 +16,10 @@ extends MeshInstance3D
 var array_mesh: ArrayMesh
 var original_vertices: PackedVector3Array
 var original_normals: PackedVector3Array 
+var shader_material: ShaderMaterial
 
 func _ready() -> void: 
+	shader_material = get_active_material(0) as ShaderMaterial
 	regenerate_mesh()
 
 func regenerate_mesh() -> void:
