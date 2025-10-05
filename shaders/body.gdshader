@@ -29,7 +29,7 @@ uniform sampler2D noise : hint_default_black;
 
 // Posición del impacto
 uniform vec3 impact_position = vec3(0.0, 0.0, 0.0);
-uniform float impact_radius : hint_range(0.0, 5.0) = 24.5;
+uniform float impact_radius : hint_range(0.0, 5.0) = 0.5;
 uniform float impact_strength : hint_range(0.0, 1.0) = 1.0;
 
 varying vec3 triplanar_power_normal;
