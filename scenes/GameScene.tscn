@@ -1,10 +1,11 @@
-[gd_scene load_steps=26 format=3 uid="uid://cxksh2pfuxdhh"]
+[gd_scene load_steps=27 format=3 uid="uid://cxksh2pfuxdhh"]
 
 [ext_resource type="Script" uid="uid://burhql6xgx4jg" path="res://scenes/game_scene.gd" id="1_7s5hy"]
 [ext_resource type="PackedScene" uid="uid://yo6lqoksa53k" path="res://scenes/planet_terrestrial.tscn" id="1_vh257"]
 [ext_resource type="Script" uid="uid://chxn27c3ghsgi" path="res://scenes/camera_3d.gd" id="2_cxv17"]
 [ext_resource type="Script" uid="uid://bnon40jqfopks" path="res://scenes/meteorito.gd" id="3_cxv17"]
 [ext_resource type="Script" uid="uid://cf7u6v7o1put0" path="res://scenes/HUD.gd" id="4_18ig4"]
+[ext_resource type="PackedScene" path="res://scenes/planet_no_atmosphere.tscn" id="5_21xg8"]
 [ext_resource type="Script" uid="uid://e4se82mbtr85" path="res://scenes/label.gd" id="6_xs4ih"]
 [ext_resource type="Texture2D" uid="uid://dnukuskmmc1lk" path="res://assets/FREE Icon/Icon set 1/1x/Asset 71.png" id="7_6ytau"]
 [ext_resource type="Texture2D" uid="uid://4f40bi5g8wgu" path="res://assets/FREE Icon/Icon set 1/0.5x/Asset 28@0.5x.png" id="8_j40tv"]
@@ -158,7 +159,7 @@ script = ExtResource("1_7s5hy")
 [node name="Planets" type="Node3D" parent="."]
 
 [node name="PlanetTerrestrial" parent="Planets" instance=ExtResource("1_vh257")]
-transform = Transform3D(-398.61642, 0, -33.2451, 0, 400, 0, 33.2451, 0, -398.61642, -13.7392845, 9.437153, -3.3273315)
+transform = Transform3D(396.35562, 0, -53.874943, 0, 400, 0, 53.874943, 0, 396.35562, -13.7392845, 9.437153, -3.3273315)
 layers = 3
 
 [node name="Environment" type="Node3D" parent="."]
@@ -194,6 +195,12 @@ mesh = SubResource("SphereMesh_18ig4")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Meteorito"]
 shape = SubResource("SphereShape3D_7s5hy")
+
+[node name="Moon" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 145.2768, 0, -360.3514)
+
+[node name="PlanetNoAtmosphere" parent="Moon" instance=ExtResource("5_21xg8")]
+transform = Transform3D(200.00038, 0, 0.00089327764, 0, 199.99997, 0, -0.00089327764, 0, 200.00038, 0, 0, 0)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -384,8 +391,8 @@ texture_normal = ExtResource("11_e8rlm")
 texture_pressed = ExtResource("10_w22tq")
 stretch_mode = 0
 
-[connection signal="pressed" from="CanvasLayer/HUD/Bt_Menu" to="." method="_on_texture_button_2_pressed"]
 [connection signal="pressed" from="CanvasLayer/HUD/Bt_Menu" to="." method="_on_bt_menu_pressed"]
+[connection signal="pressed" from="CanvasLayer/HUD/Bt_Menu" to="." method="_on_texture_button_2_pressed"]
 [connection signal="toggled" from="CanvasLayer/HUD/Bt_Menu" to="." method="_on_bt_menu_toggled"]
 [connection signal="pressed" from="CanvasLayer/HUD/Bt_Menu2" to="." method="_on_bt_menu_2_pressed"]
 [connection signal="pressed" from="CanvasLayer/HUD/Bt_Menu2" to="." method="_on_texture_button_2_pressed"]
