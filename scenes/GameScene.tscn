@@ -26,6 +26,7 @@
 [ext_resource type="Script" uid="uid://bnon40jqfopks" path="res://scenes/meteorito.gd" id="3_cxv17"]
 [ext_resource type="Script" uid="uid://cf7u6v7o1put0" path="res://scenes/HUD.gd" id="4_18ig4"]
 [ext_resource type="PackedScene" path="res://scenes/planet_no_atmosphere.tscn" id="5_21xg8"]
+[ext_resource type="Script" uid="uid://cj0lmuxvp8dl8" path="res://scenes/HUD.gd" id="4_18ig4"]
 [ext_resource type="Script" uid="uid://e4se82mbtr85" path="res://scenes/label.gd" id="6_xs4ih"]
 [ext_resource type="Texture2D" uid="uid://dnukuskmmc1lk" path="res://assets/FREE Icon/Icon set 1/1x/Asset 71.png" id="7_6ytau"]
 [ext_resource type="Texture2D" uid="uid://4f40bi5g8wgu" path="res://assets/FREE Icon/Icon set 1/0.5x/Asset 28@0.5x.png" id="8_j40tv"]
@@ -323,6 +324,7 @@ transform = Transform3D(-71.6757, 0, 393.5262, 0, 400, 0, -393.5262, 0, -71.6757
 transform = Transform3D(398.36813, 0, 36.0988, 0, 400, 0, -36.0988, 0, 398.36813, -13.7392845, 9.437153, -3.3273315)
 >>>>>>> 6383ee3 (mira alexander)
 transform = Transform3D(396.35562, 0, -53.874943, 0, 400, 0, 53.874943, 0, 396.35562, -13.7392845, 9.437153, -3.3273315)
+transform = Transform3D(-30.848785, 0, 398.80902, 0, 400, 0, -398.80902, 0, -30.848785, -13.7392845, 9.437153, -3.3273315)
 layers = 3
 
 [node name="Environment" type="Node3D" parent="."]
@@ -425,13 +427,36 @@ grow_vertical = 2
 script = ExtResource("4_18ig4")
 
 [node name="Label" type="Label" parent="CanvasLayer/HUD"]
+visible = false
 layout_mode = 0
 offset_left = 152.0
 offset_right = 743.0
 offset_bottom = 118.0
 script = ExtResource("6_xs4ih")
 
+[node name="Bt_Menu" type="TextureButton" parent="CanvasLayer/HUD"]
+visible = false
+layout_mode = 0
+offset_left = 24.0
+offset_top = 32.0
+offset_right = 280.0
+offset_bottom = 204.0
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("8_j40tv")
+stretch_mode = 0
+
+[node name="Lb_Layer" type="Label" parent="CanvasLayer/HUD"]
+visible = false
+layout_mode = 0
+offset_left = 144.0
+offset_top = 32.0
+offset_right = 301.0
+offset_bottom = 55.0
+text = "ASTEROIDES"
+horizontal_alignment = 1
+
 [node name="TextureButton" type="TextureButton" parent="CanvasLayer/HUD"]
+visible = false
 texture_filter = 1
 layout_mode = 0
 offset_left = 1311.0
@@ -440,16 +465,6 @@ offset_right = 1821.0
 offset_bottom = 526.0
 scale = Vector2(0.2, 0.2)
 texture_normal = ExtResource("7_6ytau")
-stretch_mode = 0
-
-[node name="Bt_Menu" type="TextureButton" parent="CanvasLayer/HUD"]
-layout_mode = 0
-offset_left = 24.0
-offset_top = 32.0
-offset_right = 280.0
-offset_bottom = 204.0
-scale = Vector2(0.3, 0.3)
-texture_normal = ExtResource("8_j40tv")
 stretch_mode = 0
 
 [node name="layer" type="TextureRect" parent="CanvasLayer/HUD"]
@@ -494,15 +509,6 @@ popup/item_2/id = 2
 popup/item_3/text = "Meteorito 4"
 popup/item_3/id = 3
 
-[node name="Lb_Layer" type="Label" parent="CanvasLayer/HUD"]
-layout_mode = 0
-offset_left = 144.0
-offset_top = 32.0
-offset_right = 301.0
-offset_bottom = 55.0
-text = "ASTEROIDES"
-horizontal_alignment = 1
-
 [node name="Bt_Menu2" type="TextureButton" parent="CanvasLayer/HUD"]
 visible = false
 layout_mode = 0
@@ -517,10 +523,10 @@ stretch_mode = 0
 
 [node name="TextureButton3" type="TextureButton" parent="CanvasLayer/HUD"]
 layout_mode = 0
-offset_left = 1176.0
-offset_top = 16.0
-offset_right = 1680.0
-offset_bottom = 454.0
+offset_left = 1305.0
+offset_top = 23.0
+offset_right = 1809.0
+offset_bottom = 461.0
 scale = Vector2(0.2, 0.2)
 texture_normal = ExtResource("9_e8rlm")
 stretch_mode = 0
@@ -559,16 +565,6 @@ theme_override_font_sizes/font_size = 50
 text = "Asteroides"
 flat = false
 switch_on_hover = true
-item_count = 4
-popup/item_0/text = "Asteroides"
-popup/item_0/id = 0
-popup/item_0/separator = true
-popup/item_1/text = "AYUDA"
-popup/item_1/id = 1
-popup/item_2/text = "aaaa"
-popup/item_2/id = 2
-popup/item_3/text = "XDD"
-popup/item_3/id = 3
 
 [node name="TextureButton6" type="TextureButton" parent="CanvasLayer/HUD"]
 layout_mode = 0
@@ -605,6 +601,6 @@ stretch_mode = 0
 [connection signal="pressed" from="CanvasLayer/HUD/Bt_Menu" to="." method="_on_bt_menu_pressed"]
 [connection signal="pressed" from="CanvasLayer/HUD/Bt_Menu" to="." method="_on_texture_button_2_pressed"]
 [connection signal="toggled" from="CanvasLayer/HUD/Bt_Menu" to="." method="_on_bt_menu_toggled"]
-[connection signal="pressed" from="CanvasLayer/HUD/Bt_Menu2" to="." method="_on_bt_menu_2_pressed"]
 [connection signal="pressed" from="CanvasLayer/HUD/Bt_Menu2" to="." method="_on_texture_button_2_pressed"]
+[connection signal="pressed" from="CanvasLayer/HUD/Bt_Menu2" to="." method="_on_bt_menu_2_pressed"]
 [connection signal="toggled" from="CanvasLayer/HUD/Bt_Menu2" to="." method="_on_bt_menu_toggled"]

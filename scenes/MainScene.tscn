@@ -491,7 +491,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(1054, 374)
+position = Vector2(1077.0001, 359.00003)
 scale = Vector2(7, 7)
 sprite_frames = SubResource("SpriteFrames_g8282")
 frame_progress = 0.34254786
