@@ -1,7 +1,7 @@
 # asteroides.gd
 extends RigidBody3D
 
-@export var fuerza_gravedad = 10000000000000.0
+@export var fuerza_gravedad = 80000.0
 
 var planeta_cercano = null
 var gravedad_activa = false # Nueva variable para controlar la activación
