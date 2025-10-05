@@ -44,7 +44,7 @@ shader_parameter/impact_strength = 1.0
 lightmap_size_hint = Vector2i(17, 9)
 material = SubResource("ShaderMaterial_d0a0i")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_nmd1c"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o50su"]
 render_priority = 0
 shader = ExtResource("4_dqmhf")
 shader_parameter/color_1 = Color(0, 0.12, 0.27, 1)
@@ -55,7 +55,7 @@ shader_parameter/intensity = 4.0
 shader_parameter/emit = false
 
 [sub_resource type="SphereMesh" id="SphereMesh_lk7tp"]
-material = SubResource("ShaderMaterial_nmd1c")
+material = SubResource("ShaderMaterial_o50su")
 
 [sub_resource type="Animation" id="Animation_2yx44"]
 resource_name = "Rotation"
@@ -95,7 +95,7 @@ node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
 margin = 0.05
 
 [node name="PlanetTerrestrial" type="MeshInstance3D"]
-transform = Transform3D(378.9156, 0, 128.15335, 0, 399.99994, 0, -128.15335, 0, 378.9156, -2.0653687, 326.36914, -15.56311)
+transform = Transform3D(392.26782, 0, 78.27039, 0, 399.99994, 0, -78.27039, 0, 392.26782, -2.0653687, 326.36914, -15.56311)
 mesh = SubResource("SphereMesh_h4ifb")
 skeleton = NodePath(".")
 script = ExtResource("4_o50su")
@@ -119,5 +119,6 @@ parameters/TimeScale/scale = 0.08
 [node name="Area3D" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0, 0)
 shape = SubResource("SphereShape3D_hft54")
-debug_color = Color(0.91764706, 0.14901961, 0.6117647, 0.6862745)
+debug_color = Color(0.9882353, 0, 0, 1)

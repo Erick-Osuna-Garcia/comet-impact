@@ -1,8 +1,62 @@
 extends RigidBody3D
 
-@export var planet: Node3D
+@export var multiplo_gravedad = 10
+@export var fuerza_gravedad = 9.8 
+
+var planeta_cercano = null
+var gravedad_activa = false # Nueva variable para controlar la activación
+
+func _ready():
+	# Hacemos que la física esté desactivada al iniciar.
+	fuerza_gravedad = multiplo_gravedad * fuerza_gravedad
+	set_physics_process(false)
 
 func _physics_process(delta):
-	if planet:
-		var dir = (planet.global_position - global_position).normalized()
-		apply_central_force(dir * 50.0)  # fuerza de atracción hacia el planeta
+	if not is_instance_valid(planeta_cercano):
+		return
+	
+	print(fuerza_gravedad)
+	# (El resto de tu lógica de cálculo de fuerza se queda igual)
+	var direccion = planeta_cercano.global_position - self.global_position
+	var distancia_cuadrada = direccion.length_squared()
+	
+	if distancia_cuadrada == 0:
+		return
+		
+	var magnitud_fuerza = (fuerza_gravedad * self.mass) / distancia_cuadrada
+	var fuerza_final = direccion.normalized() * magnitud_fuerza
+	apply_central_force(fuerza_final)
+	
+	#print("Aplicando fuerza a ", self.name, ": ", fuerza_final)
+
+func encontrar_planeta_cercano():
+	# (Esta función se queda igual)
+	var cuerpos = get_tree().get_nodes_in_group("cuerpos_gravitacionales")
+	var distancia_minima = INF
+	
+	if cuerpos.size() == 0:
+		print("ADVERTENCIA: No se encontró ningún nodo en el grupo 'cuerpos_gravitacionales'.")
+		return
+
+	for cuerpo in cuerpos:
+		var distancia = self.global_position.distance_to(cuerpo.global_position)
+		if distancia < distancia_minima:
+			distancia_minima = distancia
+			planeta_cercano = cuerpo
+	
+	if is_instance_valid(planeta_cercano):
+		print(self.name, " encontró su planeta: ", planeta_cercano.name)
+
+# --- NUEVA FUNCIÓN PARA ACTIVAR LA GRAVEDAD ---
+# Esta función será llamada desde la cámara.
+func activar_gravedad():
+	# Si ya está activa, no hace nada más.
+	if gravedad_activa:
+		return
+	
+	gravedad_activa = true
+	print("¡Gravedad ACTIVADA para ", self.name, "!")
+	# Busca el planeta más cercano en el momento de la activación.
+	encontrar_planeta_cercano()
+	# Activa la ejecución de _physics_process().
+	set_physics_process(true)

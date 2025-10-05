@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://3sxsmbh20iwn"]
+
+[ext_resource type="Script" uid="uid://bnon40jqfopks" path="res://scenes/meteorito.gd" id="1_db5m5"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xy3my"]
+friction = 0.5
+rough = true
+bounce = 0.5
+absorbent = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_18ig4"]
+radius = 5.0
+height = 10.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7s5hy"]
+
+[node name="Meteorito" type="RigidBody3D" groups=["asteroides", "meteors"]]
+transform = Transform3D(-0.0016457046, 0, -0.0011365107, 0, 0.002, 0, 0.0011365107, 0, -0.0016457046, 0, 0, 0)
+physics_material_override = SubResource("PhysicsMaterial_xy3my")
+gravity_scale = 0.0
+script = ExtResource("1_db5m5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_18ig4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_7s5hy")
