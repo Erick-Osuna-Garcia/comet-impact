@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://cxksh2pfuxdhh"]
+
+[ext_resource type="Script" uid="uid://d3ckrwjk3hq8e" path="res://scripts/generadorAsteroides.gd" id="1_18ig4"]
+[ext_resource type="PackedScene" uid="uid://yo6lqoksa53k" path="res://scenes/planet_terrestrial.tscn" id="1_vh257"]
+[ext_resource type="Script" uid="uid://dm1f3g1kjcg8o" path="res://scripts/camara.gd" id="2_cxv17"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_vh257"]
+
+[sub_resource type="Environment" id="Environment_xy3my"]
+
+[node name="Container" type="Node3D"]
+script = ExtResource("1_18ig4")
+
+[node name="Tierra" type="Node3D" parent="." groups=["observable"]]
+
+[node name="PlanetTerrestrial" parent="Tierra" instance=ExtResource("1_vh257")]
+transform = Transform3D(-347.06973, 0, -198.85387, 0, 400, 0, 198.85387, 0, -347.06973, -13.725143, 7.729828, -3.3273315)
+
+[node name="Tierra" type="StaticBody3D" parent="Tierra" groups=["cuerpos_gravitacionales"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Tierra/Tierra"]
+shape = SubResource("SphereShape3D_vh257")
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_xy3my")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8652883, -1.1098161, 1.5810289)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84105915, 12.581798, 353.70035)
+fov = 77.0
+script = ExtResource("2_cxv17")
+initial_target = NodePath("../Tierra")
