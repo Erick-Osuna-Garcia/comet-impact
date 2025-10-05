@@ -4,9 +4,9 @@ extends Camera3D
 # --- Variables para controlar la cámara desde el Inspector ---
 @export var initial_target: NodePath 
 @export var rotation_speed = 1.0
-@export var zoom_speed = 0.005
-@export var min_zoom = 500
-@export var max_zoom = 1000
+@export var zoom_speed = 10.0
+@export var min_zoom = 50
+@export var max_zoom = 500
 
 # --- Variables internas de la cámara ---
 var target: Node3D = null
@@ -30,9 +30,9 @@ func _unhandled_input(event):
 		return
 		
 	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_WHEEL_UP and event.is_pressed():
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			distance = clamp(distance - zoom_speed, min_zoom, max_zoom)
-		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.is_pressed():
+		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			distance = clamp(distance + zoom_speed, min_zoom, max_zoom)
 
 func _physics_process(delta):
